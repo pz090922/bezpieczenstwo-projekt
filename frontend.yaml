@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  labels:
+    app: instagram
+spec:
+  selector:
+    app: instagram
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: instagram-deployment
+  labels:
+    app: instagram
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: instagram
+  template:
+    metadata:
+      labels:
+        app: instagram
+    spec:
+      containers:
+        - name: frontend
+          image: siwy630/frontend-image:latest
+          resources:
+            limits:
+              cpu: '400m'
+              memory: '800Mi'
+          ports:
+            - containerPort: 3000
+
+
+
+
+# Oczywiście, oto dokładne wyjaśnienie każdej linii w pliku YAML dla mikroserwisu A:
+
+# apiVersion: v1: Wskazuje na wersję API Kubernetes, z którą plik jest zgodny. Tutaj używamy wersji API w1, która jest wersją API dla podstawowych obiektów Kubernetes.
+# kind: Service: Określa, że ten obiekt Kubernetes jest serwisem, który umożliwia eksponowanie aplikacji i dostęp do niej z innych części klastra.
+# metadata: Sekcja ta zawiera metadane dla obiektu, takie jak nazwa serwisu.
+# name: microservice-a-service: Określa nazwę serwisu, która będzie używana do odwoływania się do niego w klastrze.
+# spec: Zawiera specyfikację konfiguracji serwisu.
+# selector: Określa, które podstawowe zasoby (np. pod) będą obsługiwane przez ten serwis. Tutaj wybieramy wszystkie podstawowe zasoby, które mają etykietę "app" o wartości "microservice-a".
+# ports: Definiuje porty, na których serwis będzie nasłuchiwał.
+# protocol: TCP: Określa protokół komunikacyjny, tutaj jest to TCP.
+# port: 80: Określa numer portu, na którym serwis będzie dostępny z zewnątrz klastra.
+# targetPort: 3000: Określa numer portu docelowego na podstawowej usłudze, która ma być docelowo osiągalna poprzez serwis.
+# type: LoadBalancer: Określa typ serwisu. Tutaj typ LoadBalancer oznacza, że Kubernetes utworzy zewnętrzny obiekt równoważenia obciążenia (np. LoadBalancer na platformie chmurowej), aby umożliwić dostęp do serwisu z zewnątrz klastra.
+# Następnie mamy konfigurację obiektu Deployment:
+
+# apiVersion: apps/v1: Wersja API dla obiektów związanych z zarządzaniem aplikacjami, takimi jak Deployment.
+# kind: Deployment: Określa, że ten obiekt jest konfiguracją wdrażania, która zarządza replikami aplikacji.
+# metadata: Metadane dla obiektu Deployment, takie jak nazwa.
+# name: microservice-a: Nazwa Deployment.
+# spec: Specyfikacja konfiguracji wdrożenia.
+# replicas: 1: Określa liczbę replik (instancji) aplikacji, które mają być uruchomione.
+# selector: Określa, które podstawowe zasoby (np. pod) zostaną zarządzane przez to wdrożenie na podstawie etykiet.
+# template: Szablon definicji pod, który będzie używany do tworzenia nowych replik.
+# metadata: Metadane dla szablonu pod.
+# labels: Etykiety, które zostaną przypisane do pod.
+# spec: Specyfikacja kontenera w pod.
+# containers: Lista kontenerów w pod.
+# name: Nazwa kontenera.
+# image: Obraz Docker, który zostanie użyty do utworzenia kontenera.
+# ports: Definicja portów, które zostaną eksponowane przez kontener.
