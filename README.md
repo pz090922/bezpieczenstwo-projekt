@@ -1,6 +1,6 @@
 # bezpieczenstwo-projekt
-
-Jest to projekt z instagramem. Próbowałem zrobić, aby wszystko było w kubernetesie, ale z jakiegoś niewiadomego mi powódu, Keycloak nie dawał mi dostępu do api, a niestety nie miałem czasu, żeby to zbadać, więc prawdopodobnie w czasie będę to zmieniał
+### Autor: Paweł Zawistowski
+Jest to projekt klona Instagrama. Można dodawać posty, komentować like'ować, zmieniać profilowe, jak i również obserwować innych użytkowników i przeglądać ich profile. Próbowałem zrobić, aby wszystko było w kubernetesie, ale z jakiegoś niewiadomego mi powódu, Keycloak nie dawał mi dostępu do api, a niestety nie miałem czasu, żeby to zbadać, więc prawdopodobnie w czasie będę to zmieniał
 ## Mały problem
 Istnieje folder kubectl--Nie_działa. Na niego proszę nie zwracać uwagi. Chciałem po prostu trzymać wszystko na jednym repo, i tam jest wszystko, aby działało w Kubernetes, tylko jak już wspomniałem, Keycloak "nie chciał" mnie uwierzytelnić
 
@@ -73,3 +73,8 @@ A w przypadku serwera (będąc w katalogu server)
 node server.js
 ```
 
+Odpalamy Instagrama w przeglądarce wpisując adres
+```
+http://localhost:3000
+```
+Koniec 😊
