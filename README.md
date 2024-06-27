@@ -4,6 +4,9 @@ Jest to projekt klona Instagrama. Można dodawać posty, komentować like'ować,
 ## Mały problem
 Istnieje folder kubectl--Nie_działa. Na niego proszę nie zwracać uwagi. Chciałem po prostu trzymać wszystko na jednym repo, i tam jest wszystko, aby działało w Kubernetes, tylko jak już wspomniałem, Keycloak "nie chciał" mnie uwierzytelnić
 
+## Keycloak
+Uwierzytelnianie polega na wykorzystaniu dwóch klientów. Jeden nazywa się frontend-client, który jest publiczny, a drugi już z secretem nazywa się backend-api. Użyłem również pkce.
+
 ## Jak uruchomić
 Uruchamiamy pod'y
 ```
