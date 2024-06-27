@@ -1,0 +1,66 @@
+async createUser(req, res) {
+    let newUser;
+    if (!req.body) return res.status(400).json({ error: "Musisz podać dane!" });
+
+    const { username, password, firstName, lastName, email, gender } = req.body;
+    if (
+      !username.trim().length ||
+      !password.trim().length ||
+      !firstName.trim().length ||
+      !lastName.trim().length ||
+      !email.trim().length ||
+      !gender
+    ) {
+      return res.status(400).json({ error: "Brak wymaganych danych." });
+    }
+
+    const userExsists = await User.findOne({ username });
+
+    if (userExsists) {
+      return res
+        .status(400)
+        .json({ error: "Użytkownik o takim loginie już istnieje!" });
+    }
+
+    if (password.length < 8) {
+      return res.status(400).json({ error: "Hasło jest za krótkie!" });
+    }
+    try {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      newUser = new User({
+        username,
+        password: hashedPassword,
+        firstName,
+        lastName,
+        email,
+        gender,
+      });
+      await newUser.save();
+    } catch (error) {
+      const output = Object.values(error.errors)[0].message;
+      return res.status(400).json({ error: output });
+    }
+    return res.status(201).json(newUser);
+  }
+  async loginUser(req, res) {
+    try {
+      if (!req.body.username || !req.body.password)
+        return res.status(400).json({ error: "Musisz podać login i hasło!" });
+      const { username, password } = req.body;
+      const userExsists = await User.findOne({ username });
+      if (!userExsists) {
+        return res
+          .status(400)
+          .json({ error: "Nieprawidłowy login lub hasło!" });
+      }
+      const isMatch = await bcrypt.compare(password, userExsists.password);
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ error: "Nieprawidłowy login lub hasło!" });
+      }
+      return res.status(200).json({ token: jwtToken });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  }
