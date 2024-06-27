@@ -63,7 +63,7 @@ spec:
             claimName: backend-pv-claim
       containers:
         - name: backend-api
-          image: siwy630/backend-api-image:latest
+          image: siwy630/backend-api-image:2.0
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -90,6 +90,4 @@ spec:
                 configMapKeyRef:
                   name: mongo-configmap
                   key: database_url
-            - name: KC_SECRET
-              value: "**********"
               
