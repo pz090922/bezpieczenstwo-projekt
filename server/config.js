@@ -5,7 +5,7 @@ module.exports = {
   url: process.env.ME_CONFIG_MONGODB_SERVER,
   password: process.env.MONGO_INITDB_ROOT_PASSWORD,
   user: process.env.MONGO_INITDB_ROOT_USERNAME,
-  keycloak_secret: process.env.KC_SECRET || "**********"
+  database: "mongodb+srv://pzawistowski2:GdnEBFUhkvGPFpbn@cluster0.ahvzcsc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
 };
 // "mongodb://localhost:27017",
 // GdnEBFUhkvGPFpbn
