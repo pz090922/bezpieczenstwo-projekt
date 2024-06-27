@@ -25,7 +25,7 @@ const keycloak = new Keycloak({ store: memoryStore },{
   "resource": "backend-api",
   "verify-token-audience": true,
   "credentials": {
-    "secret": keycloak_secret
+    "secret": "**********"
   },
   "use-resource-role-mappings": true,
   "confidential-port": 0,

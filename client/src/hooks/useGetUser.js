@@ -8,7 +8,8 @@ export function useGetUser() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // console.log(keycloak.tokenParsed)
+        console.log(keycloak.tokenParsed)
+        console.log(keycloak.token)
         const response = await axios.post(
           `${process.env.REACT_APP_API_URL}/getUserInfoByToken`, { data: keycloak.tokenParsed}, {
             headers: {
